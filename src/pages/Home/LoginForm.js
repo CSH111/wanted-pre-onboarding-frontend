@@ -1,14 +1,23 @@
+import axios from "axios";
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import useInput from "../../hooks/useInput";
 
 const LoginForm = () => {
   const [emailValue, handleEmailChange] = useInput("");
   const [pwValue, handlePwChange] = useInput("");
-
+  const navigate = useNavigate();
   const handleSumbit = (e) => {
     e.preventDefault();
-    console.log(emailValue);
-    console.log(pwValue);
+    const body = { email: emailValue, password: pwValue };
+
+    axios
+      .post("https://pre-onboarding-selection-task.shop/auth/signin", body) //
+      .then((res) => {
+        localStorage.setItem("token", res.data.access_token);
+        navigate("/todo");
+      })
+      .catch(console.log);
   };
 
   return (

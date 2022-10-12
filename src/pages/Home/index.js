@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import FormToggler from "./FormToggler";
 import LoginForm from "./LoginForm";
 import RegisterForm from "./RegisterForm";
@@ -8,6 +9,14 @@ const Home = () => {
     login: false,
     register: false,
   });
+  const navigate = useNavigate();
+  //navigate 재사용하기
+
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (token) navigate("/todo");
+  }, []);
+
   return (
     <>
       <div>home..</div>
