@@ -1,5 +1,5 @@
-import useInput from "../../hooks/useInput";
-import axios from "../../api/axios";
+import { useInput } from "../../hooks";
+import { axiosPrivate } from "../../api/axios";
 import useTodoContext from "../../hooks/useTodoContext";
 
 const TodoForm = () => {
@@ -8,19 +8,14 @@ const TodoForm = () => {
 
   const handleSumbit = async (e) => {
     e.preventDefault();
-
     setInputValue("");
     const body = { todo: inputValue };
-    const headers = {
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${localStorage.getItem("token")}`,
-      },
-    };
-
-    axios
-      .post("/todos", body, headers) //
-      .then((res) => setItems((items) => [...items, res.data]))
+    console.dir(axiosPrivate);
+    axiosPrivate
+      .post("/todos", body) //
+      .then((res) => {
+        setItems((items) => [...items, res.data]);
+      })
       .catch(console.log);
   };
 

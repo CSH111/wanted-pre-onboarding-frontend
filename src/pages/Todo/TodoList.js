@@ -1,20 +1,13 @@
 import React, { useEffect } from "react";
-import axios from "../../api/axios";
+import axios, { axiosPrivate } from "../../api/axios";
 import useTodoContext from "../../hooks/useTodoContext";
 import TodoListItem from "./TodoListItem";
 
 const TodoList = () => {
   const { items, setItems } = useTodoContext();
   useEffect(() => {
-    const headers = {
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${localStorage.getItem("token")}`,
-      },
-    };
-
-    axios
-      .get("/todos", headers) //
+    axiosPrivate
+      .get("/todos") //
       .then((res) => {
         setItems(res.data);
       })

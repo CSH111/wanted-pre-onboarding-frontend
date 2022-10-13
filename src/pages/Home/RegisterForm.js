@@ -1,15 +1,17 @@
+import { URL } from "../../api/url";
+import { useAccount } from "../../hooks";
 import useInput from "../../hooks/useInput";
-import useRegister from "../../hooks/useRegister";
 
 const RegisterForm = () => {
   const [emailValue, handleEmailChange] = useInput("");
   const [pwValue, handlePwChange] = useInput("");
-  const { register, isLoading, error } = useRegister();
+  const { postAccount, error } = useAccount();
+  const { REGISTER } = URL;
 
   const handleSumbit = (e) => {
     e.preventDefault();
     const body = { email: emailValue, password: pwValue };
-    register(body);
+    postAccount(REGISTER, body);
     console.log(error);
   };
 

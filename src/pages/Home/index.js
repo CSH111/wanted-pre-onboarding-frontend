@@ -10,7 +10,6 @@ const Home = () => {
     register: false,
   });
   const navigate = useNavigate();
-  //navigate 재사용하기
 
   useEffect(() => {
     const token = localStorage.getItem("token");

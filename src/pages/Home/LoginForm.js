@@ -1,16 +1,16 @@
-import { useNavigate } from "react-router-dom";
-import useInput from "../../hooks/useInput";
-import useLogin from "../../hooks/useLogin";
+import { URL } from "../../api/url";
+import { useAccount, useInput } from "../../hooks";
 
 const LoginForm = () => {
   const [emailValue, handleEmailChange] = useInput("");
   const [pwValue, handlePwChange] = useInput("");
-  const { login, error, isLoading } = useLogin();
+  const { postAccount, error } = useAccount();
+  const { LOGIN } = URL;
 
   const handleSumbit = (e) => {
     e.preventDefault();
     const body = { email: emailValue, password: pwValue };
-    login(body);
+    postAccount(LOGIN, body);
     console.log(error);
   };
 
