@@ -1,13 +1,15 @@
-import React, { useRef } from "react";
 import useInput from "../../hooks/useInput";
 import axios from "../../api/axios";
+import useTodoContext from "../../hooks/useTodoContext";
+
 const TodoForm = () => {
-  const [inputValue, handleChange] = useInput("");
-  const todoInput = useRef();
+  const [inputValue, handleChange, setInputValue] = useInput("");
+  const { items, setItems } = useTodoContext();
 
   const handleSumbit = async (e) => {
     e.preventDefault();
-    todoInput.current.value = "";
+
+    setInputValue("");
     const body = { todo: inputValue };
     const headers = {
       headers: {
@@ -15,13 +17,10 @@ const TodoForm = () => {
         Authorization: `Bearer ${localStorage.getItem("token")}`,
       },
     };
-
-    await axios
+    axios
       .post("/todos", body, headers) //
-      .then((res) => console.log(res))
+      .then((res) => setItems((items) => [...items, res.data]))
       .catch(console.log);
-
-    console.log("hi");
   };
 
   return (
@@ -30,7 +29,6 @@ const TodoForm = () => {
         type="text"
         value={inputValue}
         onChange={handleChange}
-        ref={todoInput}
         placeholder="할 일을 입력하세요"
       />
       <button type="submit">제출</button>

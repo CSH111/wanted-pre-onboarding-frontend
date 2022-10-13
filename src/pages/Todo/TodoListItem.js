@@ -3,7 +3,7 @@ import axios from "../../api/axios";
 import useTodoContext from "../../hooks/useTodoContext";
 
 const TodoListItem = ({ item, setItems }) => {
-  const filterById = (id) => {
+  const filterItemsById = (id) => {
     setItems((items) => items.filter((_item) => _item.id !== item.id));
   };
 
@@ -14,9 +14,10 @@ const TodoListItem = ({ item, setItems }) => {
         Authorization: `Bearer ${localStorage.getItem("token")}`,
       },
     };
+
     axios
       .delete(`/todos/${item.id}`, headers) //
-      .then(() => filterById(item.id))
+      .then(() => filterItemsById(item.id))
       .catch(console.log);
   };
 
