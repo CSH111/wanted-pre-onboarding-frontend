@@ -1,31 +1,35 @@
-import axios from "axios";
-import React from "react";
 import { useNavigate } from "react-router-dom";
 import useInput from "../../hooks/useInput";
+import useLogin from "../../hooks/useLogin";
 
 const LoginForm = () => {
   const [emailValue, handleEmailChange] = useInput("");
   const [pwValue, handlePwChange] = useInput("");
-  const navigate = useNavigate();
+  const { login, error, isLoading } = useLogin();
+
   const handleSumbit = (e) => {
     e.preventDefault();
     const body = { email: emailValue, password: pwValue };
-
-    axios
-      .post("https://pre-onboarding-selection-task.shop/auth/signin", body) //
-      .then((res) => {
-        localStorage.setItem("token", res.data.access_token);
-        navigate("/todo");
-      })
-      .catch(console.log);
+    login(body);
+    console.log(error);
   };
 
   return (
     <form onSubmit={handleSumbit}>
       <label htmlFor="email">email</label>
-      <input id="email" type="email" onChange={handleEmailChange} />
+      <input
+        id="email"
+        type="email"
+        onChange={handleEmailChange}
+        value={emailValue}
+      />
       <label htmlFor="pw">password</label>
-      <input id="pw" type="password" onChange={handlePwChange} />
+      <input
+        id="pw"
+        type="password"
+        onChange={handlePwChange}
+        value={pwValue}
+      />
       <button type="submit">로그인</button>
     </form>
   );

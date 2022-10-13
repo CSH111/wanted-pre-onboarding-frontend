@@ -1,5 +1,12 @@
-const Todos = () => {
-  return <div>Todos</div>;
+import TodoForm from "./TodoForm";
+
+const Todo = () => {
+  return (
+    <>
+      Todos
+      <TodoForm />
+    </>
+  );
 };
 
-export default Todos;
+export default Todo;

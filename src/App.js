@@ -15,3 +15,5 @@ function App() {
 }
 
 export default App;
+
+//axios의 디폴트헤더
