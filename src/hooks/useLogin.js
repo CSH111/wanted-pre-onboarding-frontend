@@ -8,8 +8,11 @@ const useLogin = () => {
   const [error, setError] = useState(null);
   const login = (body) => {
     setIsLoading(true);
+
+    const headers = { headers: { "Content-Type": "application/json" } };
+
     axios
-      .post("/auth/signin", body) //
+      .post("/auth/signin", body, headers) //
       .then((res) => {
         localStorage.setItem("token", res.data.access_token);
         navigate("/todo");
