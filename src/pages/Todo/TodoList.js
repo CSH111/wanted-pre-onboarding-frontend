@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import axios from "../../api/axios";
 import useTodoContext from "../../hooks/useTodoContext";
 import TodoListItem from "./TodoListItem";
@@ -12,6 +12,7 @@ const TodoList = () => {
         Authorization: `Bearer ${localStorage.getItem("token")}`,
       },
     };
+
     axios
       .get("/todos", headers) //
       .then((res) => {

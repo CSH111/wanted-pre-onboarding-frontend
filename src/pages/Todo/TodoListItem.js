@@ -1,8 +1,19 @@
-import React from "react";
+import { useRef, useState } from "react";
 import axios from "../../api/axios";
-import useTodoContext from "../../hooks/useTodoContext";
+import useInput from "../../hooks/useInput";
 
 const TodoListItem = ({ item, setItems }) => {
+  const [isModificationMode, setIsModificationMode] = useState(false);
+  const [inputValue, handleChange, setInputValue] = useInput();
+  const input = useRef();
+
+  const handleModificationMode = () => {
+    setIsModificationMode(true);
+    setInputValue(item.todo);
+    setTimeout(() => input.current.focus(), 0);
+  };
+  const handleCancelModification = () => setIsModificationMode(false);
+  const handleModification = () => {};
   const filterItemsById = (id) => {
     setItems((items) => items.filter((_item) => _item.id !== item.id));
   };
@@ -23,9 +34,25 @@ const TodoListItem = ({ item, setItems }) => {
 
   return (
     <li>
-      <div>{item.todo}</div>
-      <button>수정</button>
-      <button onClick={handleDelete}>삭제</button>
+      {isModificationMode && (
+        <>
+          <input
+            type="text"
+            value={inputValue}
+            onChange={handleChange}
+            ref={input}
+          />
+          <button onClick={handleModification}>제출</button>
+          <button onClick={handleCancelModification}>취소</button>
+        </>
+      )}
+      {!isModificationMode && (
+        <>
+          <div>{item.todo}</div>
+          <button onClick={handleModificationMode}>수정</button>
+          <button onClick={handleDelete}>삭제</button>
+        </>
+      )}
     </li>
   );
 };

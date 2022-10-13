@@ -4,7 +4,7 @@ import useTodoContext from "../../hooks/useTodoContext";
 
 const TodoForm = () => {
   const [inputValue, handleChange, setInputValue] = useInput("");
-  const { items, setItems } = useTodoContext();
+  const { setItems } = useTodoContext();
 
   const handleSumbit = async (e) => {
     e.preventDefault();
@@ -17,6 +17,7 @@ const TodoForm = () => {
         Authorization: `Bearer ${localStorage.getItem("token")}`,
       },
     };
+
     axios
       .post("/todos", body, headers) //
       .then((res) => setItems((items) => [...items, res.data]))
