@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 import axios from "../../api/axios";
+import useTodoContext from "../../hooks/useTodoContext";
 import TodoListItem from "./TodoListItem";
 
 const TodoList = () => {
-  const [items, setItems] = useState([]);
-
+  const { items, setItems } = useTodoContext();
   useEffect(() => {
     const headers = {
       headers: {
@@ -23,7 +23,7 @@ const TodoList = () => {
   return (
     <>
       {items.map((item) => {
-        return <TodoListItem key={item.id} item={item} />;
+        return <TodoListItem key={item.id} item={item} setItems={setItems} />;
       })}
     </>
   );

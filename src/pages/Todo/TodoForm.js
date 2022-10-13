@@ -4,7 +4,8 @@ import axios from "../../api/axios";
 const TodoForm = () => {
   const [inputValue, handleChange] = useInput("");
   const todoInput = useRef();
-  const handleSumbit = (e) => {
+
+  const handleSumbit = async (e) => {
     e.preventDefault();
     todoInput.current.value = "";
     const body = { todo: inputValue };
@@ -14,11 +15,13 @@ const TodoForm = () => {
         Authorization: `Bearer ${localStorage.getItem("token")}`,
       },
     };
-    // console.log(body);
-    axios
+
+    await axios
       .post("/todos", body, headers) //
       .then((res) => console.log(res))
       .catch(console.log);
+
+    console.log("hi");
   };
 
   return (
