@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { URL } from "../../api/url";
 import { AuthForm, AuthInput, AuthButton } from "../../components/Form/styles";
+import { isValidEmail, isValidPassword } from "../../helpers/validation";
 
 import { useAccount } from "../../hooks";
 import useInput from "../../hooks/useInput";
@@ -11,9 +12,6 @@ const RegisterForm = () => {
   const { postAccount, error } = useAccount();
   const { REGISTER } = URL;
   const [isBtnDisabled, setIsBtnDisabled] = useState(true);
-
-  const isValidEmail = (value) => (value.includes("@") ? true : false);
-  const isValidPassword = (value) => (value.length > 7 ? true : false);
 
   useEffect(() => {
     const isValidAll = isValidEmail(emailValue) && isValidPassword(pwValue);

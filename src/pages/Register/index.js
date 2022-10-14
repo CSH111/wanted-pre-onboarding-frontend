@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { AuthFormWrapper, AuthOutletWrapper } from "../styles";
 import RegisterForm from "./RegisterForm";
+
 const Register = () => {
   return (
     <AuthOutletWrapper>

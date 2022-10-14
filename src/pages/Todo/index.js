@@ -5,7 +5,6 @@ import { TodoContextProvider } from "../../context/TodoContext";
 const Todo = () => {
   return (
     <TodoContextProvider>
-      Todos
       <TodoForm />
       <TodoList />
     </TodoContextProvider>

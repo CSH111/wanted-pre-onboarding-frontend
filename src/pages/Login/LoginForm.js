@@ -5,14 +5,13 @@ import { useAccount, useInput } from "../../hooks";
 const LoginForm = () => {
   const [emailValue, handleEmailChange] = useInput("");
   const [pwValue, handlePwChange] = useInput("");
-  const { postAccount, error } = useAccount();
+  const { postAccount } = useAccount();
   const { LOGIN } = URL;
 
   const handleSumbit = (e) => {
     e.preventDefault();
     const body = { email: emailValue, password: pwValue };
     postAccount(LOGIN, body);
-    console.log(error);
   };
 
   return (
