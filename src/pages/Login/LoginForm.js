@@ -1,4 +1,5 @@
 import { URL } from "../../api/url";
+import { AuthForm, AuthInput, AuthButton } from "../../components/Form/styles";
 import { useAccount, useInput } from "../../hooks";
 
 const LoginForm = () => {
@@ -15,23 +16,23 @@ const LoginForm = () => {
   };
 
   return (
-    <form onSubmit={handleSumbit}>
+    <AuthForm onSubmit={handleSumbit}>
       <label htmlFor="email">email</label>
-      <input
+      <AuthInput
         id="email"
         type="email"
         onChange={handleEmailChange}
         value={emailValue}
       />
       <label htmlFor="pw">password</label>
-      <input
+      <AuthInput
         id="pw"
         type="password"
         onChange={handlePwChange}
         value={pwValue}
       />
-      <button type="submit">로그인</button>
-    </form>
+      <AuthButton type="submit">로그인</AuthButton>
+    </AuthForm>
   );
 };
 

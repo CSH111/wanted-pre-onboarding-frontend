@@ -1,12 +1,13 @@
 import { axiosPrivate } from "../api/axios";
 import useTodoContext from "./useTodoContext";
+import { URL } from "../api/url";
 
 const usePut = () => {
   const { setItems } = useTodoContext();
-
+  const { TODO } = URL;
   const putTodo = (id, body) => {
     return axiosPrivate
-      .put(`/todos/${id}`, body) //
+      .put(`${TODO}/${id}`, body) //
       .then((res) => {
         setItems((ctxItems) => {
           return ctxItems.map((ctxItem) => {

@@ -15,11 +15,11 @@ const TodoList = () => {
   }, []);
 
   return (
-    <>
+    <ul>
       {items.map((item) => {
         return <TodoListItem key={item.id} item={item} setItems={setItems} />;
       })}
-    </>
+    </ul>
   );
 };
 

@@ -1,4 +1,7 @@
+import { useEffect, useState } from "react";
 import { URL } from "../../api/url";
+import { AuthForm, AuthInput, AuthButton } from "../../components/Form/styles";
+
 import { useAccount } from "../../hooks";
 import useInput from "../../hooks/useInput";
 
@@ -7,6 +10,15 @@ const RegisterForm = () => {
   const [pwValue, handlePwChange] = useInput("");
   const { postAccount, error } = useAccount();
   const { REGISTER } = URL;
+  const [isBtnDisabled, setIsBtnDisabled] = useState(true);
+
+  const isValidEmail = (value) => (value.includes("@") ? true : false);
+  const isValidPassword = (value) => (value.length > 7 ? true : false);
+
+  useEffect(() => {
+    const isValidAll = isValidEmail(emailValue) && isValidPassword(pwValue);
+    setIsBtnDisabled(!isValidAll);
+  }, [emailValue, pwValue]);
 
   const handleSumbit = (e) => {
     e.preventDefault();
@@ -16,23 +28,25 @@ const RegisterForm = () => {
   };
 
   return (
-    <form onSubmit={handleSumbit}>
+    <AuthForm onSubmit={handleSumbit}>
       <label htmlFor="email">email</label>
-      <input
+      <AuthInput
         id="email"
         type="email"
         value={emailValue}
         onChange={handleEmailChange}
       />
       <label htmlFor="pw">password</label>
-      <input
+      <AuthInput
         id="pw"
         type="password"
         value={pwValue}
         onChange={handlePwChange}
       />
-      <button type="submit">회원가입</button>
-    </form>
+      <AuthButton type="submit" disabled={isBtnDisabled}>
+        회원가입
+      </AuthButton>
+    </AuthForm>
   );
 };
 

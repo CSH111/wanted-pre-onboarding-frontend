@@ -1,18 +1,20 @@
 import { useInput } from "../../hooks";
 import { axiosPrivate } from "../../api/axios";
 import useTodoContext from "../../hooks/useTodoContext";
+import { URL } from "../../api/url";
 
 const TodoForm = () => {
   const [inputValue, handleChange, setInputValue] = useInput("");
   const { setItems } = useTodoContext();
-
+  const { TODO } = URL;
   const handleSumbit = async (e) => {
     e.preventDefault();
     setInputValue("");
     const body = { todo: inputValue };
     console.dir(axiosPrivate);
+
     axiosPrivate
-      .post("/todos", body) //
+      .post(TODO, body) //
       .then((res) => {
         setItems((items) => [...items, res.data]);
       })
