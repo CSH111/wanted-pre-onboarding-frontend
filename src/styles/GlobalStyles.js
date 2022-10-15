@@ -10,6 +10,11 @@ ${reset}
 a {
   color:black
 }
+
+body{
+  font-family: "Times New Roman", '나눔고딕', serif;
+}
+
 html, body, #root {
   width: 100%;
   height: 100%;
