@@ -5,6 +5,7 @@ import TodoListItem from "./TodoListItem";
 
 const TodoList = () => {
   const { items, setItems } = useTodoContext();
+
   useEffect(() => {
     axiosPrivate
       .get("/todos") //

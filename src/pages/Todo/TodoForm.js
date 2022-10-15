@@ -1,8 +1,9 @@
 import { useInput } from "../../hooks";
-import { axiosPrivate, setPrivateHeaders } from "../../api/axios";
+import { axiosPrivate } from "../../api/axios";
 import useTodoContext from "../../hooks/useTodoContext";
 import { URL } from "../../api/url";
 import { useEffect, useRef } from "react";
+import { Add } from "../../components/icons";
 import * as S from "./styles";
 
 const TodoForm = () => {
@@ -17,13 +18,14 @@ const TodoForm = () => {
 
   const handleSumbit = async (e) => {
     e.preventDefault();
-    setInputValue("");
+    if (inputValue === "") return todoInput.current.focus();
     const body = { todo: inputValue };
     axiosPrivate
       .post(TODO, body) //
       .then((res) => {
         setItems((items) => [...items, res.data]);
         todoInput.current.focus();
+        setInputValue("");
       })
       .catch(console.log);
   };
@@ -37,7 +39,9 @@ const TodoForm = () => {
         onChange={handleChange}
         placeholder="할 일을 입력하세요"
       />
-      <button type="submit">제출</button>
+      <S.Button type="submit">
+        <Add />
+      </S.Button>
     </S.TodoForm>
   );
 };

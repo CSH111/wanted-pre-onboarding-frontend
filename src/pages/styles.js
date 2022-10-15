@@ -1,18 +1,13 @@
 import styled from "styled-components";
 
 export const AuthOutletWrapper = styled.div`
-  min-height: 350px;
+  flex: auto;
   padding: 0 25px;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: space-around;
   a {
-    margin-top: 25px;
+    margin-top: 50px;
     align-self: center;
   }
-`;
-
-export const AuthFormWrapper = styled.div`
-  display: flex;
-  justify-content: center;
 `;

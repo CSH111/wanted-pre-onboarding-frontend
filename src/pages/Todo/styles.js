@@ -3,20 +3,28 @@ import styled from "styled-components";
 export const ListItem = styled.li`
   display: flex;
   justify-content: space-between;
-
   margin-top: 10px;
   font-size: 15px;
   height: 40px;
+  align-items: stretch;
+`;
+
+export const ItemInput = styled.input`
+  height: 40px;
+  font-size: 15px;
+  width: 100%;
+  padding: 5px;
+  border-radius: 5px;
 `;
 
 export const TodoContents = styled.div`
   display: flex;
   align-items: center;
   padding: 5px;
+  border-radius: 5px;
   width: 100%;
   background-color: #f9d9a9;
-  border-radius: 5px;
-  margin-right: 10px;
+
   cursor: pointer;
   :hover {
     background-color: #fdc269;
@@ -34,14 +42,34 @@ export const TodoContents = styled.div`
 
 export const BtnBox = styled.div`
   display: flex;
-  align-items: center;
+  justify-content: space-around;
+`;
+export const Button = styled.button`
+  width: 35px;
+  font-size: 20px;
+  margin-left: 5px;
+  border: none;
+  border-radius: 5px;
+  background-color: #e4e4e4;
+  cursor: pointer;
+  :hover {
+    background-color: #ffb883;
+  }
+  :active {
+    transform: scale(0.95);
+  }
 `;
 
 export const TodoForm = styled.form`
   display: flex;
+  align-items: stretch;
   margin-top: 15px;
+  button {
+    height: 40px;
+  }
 `;
 
 export const TodoFormInput = styled.input`
-  height: 35px;
+  height: 40px;
+  font-size: 15px;
 `;

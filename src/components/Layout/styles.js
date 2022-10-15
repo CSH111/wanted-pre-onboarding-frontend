@@ -2,6 +2,8 @@ import styled from "styled-components";
 import { Card } from "../styles";
 
 export const Container = styled(Card)`
+  display: flex;
+  flex-direction: column;
   background-color: #ffffff;
   max-width: 400px;
   width: 100%;

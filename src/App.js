@@ -1,9 +1,7 @@
-import { Route, Routes } from "react-router-dom";
-import "./App.css";
+import { Navigate, Route, Routes } from "react-router-dom";
 import Layout from "./components/Layout";
 import { Register, Login, Todo } from "./pages";
-import Protected from "./routes/Protected";
-import Public from "./routes/Public";
+import { Protected, Public } from "./routes";
 
 function App() {
   return (
@@ -16,6 +14,7 @@ function App() {
         <Route element={<Protected />}>
           <Route path="/todo" element={<Todo />} />
         </Route>
+        <Route path="*" element={<Navigate to="/" />} />
       </Route>
     </Routes>
   );
@@ -23,4 +22,4 @@ function App() {
 
 export default App;
 
-//axios의 디폴트헤더
+//폰트적용, 아이콘, 안내메세지, 코드정리, 헤더 설정 위치

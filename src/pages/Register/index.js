@@ -1,13 +1,11 @@
 import { Link } from "react-router-dom";
-import { AuthFormWrapper, AuthOutletWrapper } from "../styles";
+import { AuthOutletWrapper } from "../styles";
 import RegisterForm from "./RegisterForm";
 
 const Register = () => {
   return (
     <AuthOutletWrapper>
-      <AuthFormWrapper>
-        <RegisterForm />
-      </AuthFormWrapper>
+      <RegisterForm />
       <Link to="/">로그인</Link>
     </AuthOutletWrapper>
   );

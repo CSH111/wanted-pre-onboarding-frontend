@@ -5,6 +5,7 @@ import useTodoContext from "./useTodoContext";
 const useDelete = () => {
   const { setItems } = useTodoContext();
   const { TODO } = URL;
+
   const filterItemsById = (id) => {
     setItems((ctxItems) => ctxItems.filter((ctxItem) => ctxItem.id !== id));
   };

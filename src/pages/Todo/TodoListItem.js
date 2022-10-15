@@ -1,18 +1,7 @@
 import { useRef, useState } from "react";
-import styled from "styled-components";
+import { Back, Delete, Edit, Ok } from "../../components/icons";
 import { useDelete, useInput, usePut } from "../../hooks";
 import * as S from "./styles";
-
-const StyledDiv = styled.div`
-  :hover {
-    background-color: #4646463d;
-  }
-  ${({ isCompleted }) =>
-    isCompleted
-      ? `text-decoration: line-through;
-         font-style: italic;`
-      : null}
-`;
 
 const TodoListItem = ({ item }) => {
   const [isModificationMode, setIsModificationMode] = useState(false);
@@ -48,15 +37,19 @@ const TodoListItem = ({ item }) => {
     <S.ListItem>
       {isModificationMode && (
         <>
-          <input
+          <S.ItemInput
             type="text"
             value={inputValue}
             onChange={handleChange}
             ref={modifyingInput}
           />
           <S.BtnBox>
-            <button onClick={handleModification}>제출</button>
-            <button onClick={handleCancelModification}>취소</button>
+            <S.Button onClick={handleModification}>
+              <Ok />
+            </S.Button>
+            <S.Button onClick={handleCancelModification}>
+              <Back />
+            </S.Button>
           </S.BtnBox>
         </>
       )}
@@ -69,8 +62,12 @@ const TodoListItem = ({ item }) => {
             {item.todo}
           </S.TodoContents>
           <S.BtnBox>
-            <button onClick={handleModificationMode}>수정</button>
-            <button onClick={handleDelete}>삭제</button>
+            <S.Button onClick={handleModificationMode}>
+              <Edit />
+            </S.Button>
+            <S.Button onClick={handleDelete}>
+              <Delete />
+            </S.Button>
           </S.BtnBox>
         </>
       )}

@@ -9,7 +9,6 @@ const usePut = () => {
     return axiosPrivate
       .put(`${TODO}/${id}`, body) //
       .then((res) => {
-        // console.log(res.data);
         setItems((ctxItems) => {
           return ctxItems.map((ctxItem) => {
             if (ctxItem.id === res.data.id) return res.data;

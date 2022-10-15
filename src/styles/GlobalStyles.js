@@ -3,10 +3,13 @@ import reset from "styled-reset";
 
 const GlobalStyles = createGlobalStyle`
 ${reset}
-*{
+* {
   box-sizing : border-box;
 }
-a{color:black}
+
+a {
+  color:black
+}
 html, body, #root {
   width: 100%;
   height: 100%;
