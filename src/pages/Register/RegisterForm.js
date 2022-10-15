@@ -1,43 +1,31 @@
 import { useEffect, useState } from "react";
 import { URL } from "../../api/url";
-import {
-  AuthForm,
-  AuthInput,
-  AuthButton,
-  AuthErrorBox,
-  ValidationMsgBox,
-  AuthLabel,
-} from "../../components/Form/styles";
-import isEmpty from "../../helpers/isEmpty";
-
-import { isValidEmail, isValidPassword } from "../../helpers/validation";
-
-import { useAccount } from "../../hooks";
-import useInput from "../../hooks/useInput";
+import * as S from "../../components/Form/styles";
+import * as validation from "../../helpers/validation";
+import { useAccount, useInput } from "../../hooks";
 
 const RegisterForm = () => {
   const [emailValue, handleEmailChange] = useInput("");
   const [pwValue, handlePwChange] = useInput("");
   const { postAccount, error } = useAccount();
   const { REGISTER } = URL;
+
   const [isBtnDisabled, setIsBtnDisabled] = useState(true);
   const [validEmailMsg, setValidEmailMsg] = useState("");
   const [validPwMsg, setValidPwMsg] = useState("");
-  // const [ValidationAlert, setValidationAlert] = useState(false)
 
   useEffect(() => {
-    setValidEmailMsg(
-      isValidEmail(emailValue) || isEmpty(emailValue) //함수명을 confirm 등으로 바꾸고 한번만돌려서 isvalidemail 변수로 이용(함수반복x)
-        ? null
-        : "잘못된 이메일 형식입니다."
-    );
-    setValidPwMsg(
-      isValidPassword(pwValue) || isEmpty(pwValue)
-        ? null
-        : "비밀번호가 너무 짧습니다.."
-    );
+    const isValidEmail = validation.isValidEmail(emailValue);
+    const isValidPw = validation.isValidPassword(pwValue);
+    const isEmptyEmail = validation.isEmpty(emailValue);
+    const isEmptyPw = validation.isEmpty(pwValue);
 
-    const isValidAll = isValidEmail(emailValue) && isValidPassword(pwValue);
+    setValidEmailMsg(
+      isValidEmail || isEmptyEmail ? null : validation.msg.email
+    );
+    setValidPwMsg(isValidPw || isEmptyPw ? null : validation.msg.pw);
+
+    const isValidAll = isValidEmail && isValidPw;
     setIsBtnDisabled(!isValidAll);
   }, [emailValue, pwValue]);
 
@@ -48,31 +36,31 @@ const RegisterForm = () => {
   };
 
   return (
-    <AuthForm onSubmit={handleSumbit}>
-      <AuthLabel htmlFor="email">
-        email <ValidationMsgBox>{validEmailMsg}</ValidationMsgBox>
-      </AuthLabel>
-      <AuthInput
+    <S.AuthForm onSubmit={handleSumbit}>
+      <S.AuthLabel htmlFor="email">
+        email <S.ValidationMsgBox>{validEmailMsg}</S.ValidationMsgBox>
+      </S.AuthLabel>
+      <S.AuthInput
         id="email"
-        type="email"
+        type="text"
         value={emailValue}
         onChange={handleEmailChange}
       />
 
-      <AuthLabel htmlFor="pw">
-        password <ValidationMsgBox>{validPwMsg}</ValidationMsgBox>
-      </AuthLabel>
-      <AuthInput
+      <S.AuthLabel htmlFor="pw">
+        password <S.ValidationMsgBox>{validPwMsg}</S.ValidationMsgBox>
+      </S.AuthLabel>
+      <S.AuthInput
         id="pw"
         type="password"
         value={pwValue}
         onChange={handlePwChange}
       />
-      <AuthButton type="submit" disabled={isBtnDisabled}>
+      <S.AuthButton type="submit" disabled={isBtnDisabled}>
         회원가입
-      </AuthButton>
-      <AuthErrorBox>{error}</AuthErrorBox>
-    </AuthForm>
+      </S.AuthButton>
+      <S.AuthErrorBox>{error}</S.AuthErrorBox>
+    </S.AuthForm>
   );
 };
 

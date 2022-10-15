@@ -1,13 +1,8 @@
 import { URL } from "../../api/url";
-import {
-  AuthForm,
-  AuthInput,
-  AuthButton,
-  AuthErrorBox,
-  AuthLabel,
-} from "../../components/Form/styles";
+import * as S from "../../components/Form/styles";
+
 import { useAccount, useInput } from "../../hooks";
-import * as S from "../styles";
+
 const LoginForm = () => {
   const [emailValue, handleEmailChange] = useInput("");
   const [pwValue, handlePwChange] = useInput("");
@@ -21,24 +16,24 @@ const LoginForm = () => {
   };
 
   return (
-    <AuthForm onSubmit={handleSumbit}>
-      <AuthLabel htmlFor="email">email</AuthLabel>
-      <AuthInput
+    <S.AuthForm onSubmit={handleSumbit}>
+      <S.AuthLabel htmlFor="email">email</S.AuthLabel>
+      <S.AuthInput
         id="email"
-        type="email"
+        type="text"
         onChange={handleEmailChange}
         value={emailValue}
       />
-      <AuthLabel htmlFor="pw">password</AuthLabel>
-      <AuthInput
+      <S.AuthLabel htmlFor="pw">password</S.AuthLabel>
+      <S.AuthInput
         id="pw"
         type="password"
         onChange={handlePwChange}
         value={pwValue}
       />
-      <AuthButton type="submit">로그인</AuthButton>
-      <AuthErrorBox>{error}</AuthErrorBox>
-    </AuthForm>
+      <S.AuthButton type="submit">로그인</S.AuthButton>
+      <S.AuthErrorBox>{error}</S.AuthErrorBox>
+    </S.AuthForm>
   );
 };
 

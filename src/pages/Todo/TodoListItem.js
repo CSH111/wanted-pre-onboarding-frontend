@@ -6,8 +6,8 @@ import * as S from "./styles";
 const TodoListItem = ({ item }) => {
   const [isModificationMode, setIsModificationMode] = useState(false);
   const [inputValue, handleChange, setInputValue] = useInput();
-  const { putTodo } = usePut();
-  const { deleteTodo } = useDelete();
+  const { putTodo, updateCtxByResponse } = usePut();
+  const { deleteTodo, updateCtxById } = useDelete();
   const modifyingInput = useRef();
 
   const handleModificationMode = () => {
@@ -20,17 +20,32 @@ const TodoListItem = ({ item }) => {
 
   const handleModification = async () => {
     const body = { todo: inputValue, isCompleted: item.isCompleted };
-    await putTodo(item.id, body);
-    setIsModificationMode(false);
+    try {
+      const res = await putTodo(item.id, body);
+      updateCtxByResponse(res);
+      setIsModificationMode(false);
+    } catch (err) {
+      console.log(err);
+    }
   };
 
-  const handleisCompleted = () => {
+  const handleisCompleted = async () => {
     const body = { todo: item.todo, isCompleted: !item.isCompleted };
-    putTodo(item.id, body);
+    try {
+      const res = await putTodo(item.id, body);
+      updateCtxByResponse(res);
+    } catch (err) {
+      console.log(err);
+    }
   };
 
-  const handleDelete = () => {
-    deleteTodo(item.id);
+  const handleDelete = async () => {
+    try {
+      await deleteTodo(item.id);
+      updateCtxById(item.id);
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   return (

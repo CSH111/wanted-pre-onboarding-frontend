@@ -5,7 +5,7 @@ export const AuthOutletWrapper = styled.div`
   padding: 0 25px;
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
+  justify-content: center;
   a {
     margin-top: 50px;
     align-self: center;

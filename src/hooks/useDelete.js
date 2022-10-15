@@ -6,18 +6,13 @@ const useDelete = () => {
   const { setItems } = useTodoContext();
   const { TODO } = URL;
 
-  const filterItemsById = (id) => {
+  const updateCtxById = (id) => {
     setItems((ctxItems) => ctxItems.filter((ctxItem) => ctxItem.id !== id));
   };
 
-  const deleteTodo = (id) => {
-    axiosPrivate
-      .delete(`${TODO}/${id}`) //
-      .then(() => filterItemsById(id))
-      .catch(console.log);
-  };
+  const deleteTodo = (id) => axiosPrivate.delete(`${TODO}/${id}`);
 
-  return { deleteTodo };
+  return { deleteTodo, updateCtxById };
 };
 
 export default useDelete;

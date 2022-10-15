@@ -1,16 +1,13 @@
-import { useInput } from "../../hooks";
-import { axiosPrivate } from "../../api/axios";
-import useTodoContext from "../../hooks/useTodoContext";
-import { URL } from "../../api/url";
+import { useInput, usePost } from "../../hooks";
 import { useEffect, useRef } from "react";
 import { Add } from "../../components/icons";
 import * as S from "./styles";
+import { isEmpty } from "../../helpers/validation";
 
 const TodoForm = () => {
   const [inputValue, handleChange, setInputValue] = useInput("");
-  const { setItems } = useTodoContext();
-  const { TODO } = URL;
   const todoInput = useRef();
+  const { postTodo, updateCtxByResponse } = usePost();
 
   useEffect(() => {
     todoInput.current.focus();
@@ -18,16 +15,18 @@ const TodoForm = () => {
 
   const handleSumbit = async (e) => {
     e.preventDefault();
-    if (inputValue === "") return todoInput.current.focus();
+    if (isEmpty(inputValue)) return todoInput.current.focus();
+
     const body = { todo: inputValue };
-    axiosPrivate
-      .post(TODO, body) //
-      .then((res) => {
-        setItems((items) => [...items, res.data]);
-        todoInput.current.focus();
-        setInputValue("");
-      })
-      .catch(console.log);
+    try {
+      const res = await postTodo(body);
+      updateCtxByResponse(res);
+      setInputValue("");
+    } catch (err) {
+      console.log(err);
+    } finally {
+      todoInput.current.focus();
+    }
   };
 
   return (
