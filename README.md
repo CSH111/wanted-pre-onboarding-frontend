@@ -80,3 +80,4 @@ npm start
 - `/pages/Todo/TodoListITem`에서 `usePut` 훅을 이용해 완료여부, 내용 수정에 대한 put요청을 보냅니다.
 - 응답받은 데이터는 `TodoContext`에 추가하고 화면에 반영합니다.
 - `useDelete` 훅을 이용해 delete요청을 보내고 화면에 반영합니다.
+- todo의 완료 여부 표시기능은 listItem의 contents 자체를 클릭해서 작동합니다.
