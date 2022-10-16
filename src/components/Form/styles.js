@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import Button from "../Button";
 
 export const AuthForm = styled.form`
   display: flex;
@@ -16,7 +17,7 @@ export const AuthForm = styled.form`
   }
 `;
 
-export const AuthButton = styled.button`
+export const AuthButton = styled(Button)`
   font-size: 15px;
   height: 35px;
 `;

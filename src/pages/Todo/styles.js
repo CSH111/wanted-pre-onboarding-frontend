@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import Button from "../../components/Button";
 
 export const ListItem = styled.li`
   display: flex;
@@ -44,20 +45,11 @@ export const BtnBox = styled.div`
   display: flex;
   justify-content: space-around;
 `;
-export const Button = styled.button`
+
+export const TodoButton = styled(Button)`
   width: 35px;
   font-size: 20px;
   margin-left: 5px;
-  border: none;
-  border-radius: 5px;
-  background-color: #e4e4e4;
-  cursor: pointer;
-  :hover {
-    background-color: #ffb883;
-  }
-  :active {
-    transform: scale(0.95);
-  }
 `;
 
 export const TodoForm = styled.form`

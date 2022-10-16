@@ -59,12 +59,12 @@ const TodoListItem = ({ item }) => {
             ref={modifyingInput}
           />
           <S.BtnBox>
-            <S.Button onClick={handleModification}>
+            <S.TodoButton onClick={handleModification}>
               <Ok />
-            </S.Button>
-            <S.Button onClick={handleCancelModification}>
+            </S.TodoButton>
+            <S.TodoButton onClick={handleCancelModification}>
               <Back />
-            </S.Button>
+            </S.TodoButton>
           </S.BtnBox>
         </>
       )}
@@ -77,12 +77,12 @@ const TodoListItem = ({ item }) => {
             {item.todo}
           </S.TodoContents>
           <S.BtnBox>
-            <S.Button onClick={handleModificationMode}>
+            <S.TodoButton onClick={handleModificationMode}>
               <Edit />
-            </S.Button>
-            <S.Button onClick={handleDelete}>
+            </S.TodoButton>
+            <S.TodoButton onClick={handleDelete}>
               <Delete />
-            </S.Button>
+            </S.TodoButton>
           </S.BtnBox>
         </>
       )}

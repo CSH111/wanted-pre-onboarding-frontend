@@ -38,9 +38,9 @@ const TodoForm = () => {
         onChange={handleChange}
         placeholder="할 일을 입력하세요"
       />
-      <S.Button type="submit">
+      <S.TodoButton type="submit">
         <Add />
-      </S.Button>
+      </S.TodoButton>
     </S.TodoForm>
   );
 };
